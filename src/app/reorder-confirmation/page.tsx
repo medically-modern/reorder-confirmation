@@ -461,7 +461,7 @@ export default function ReorderConfirmationPage() {
                     onChange={(e) => setInfusionSet1(e.target.value)}
                     className="w-full p-3 border rounded-lg text-base bg-white"
                   >
-                    {data.dropdownOptions.infusionSets.map((opt) => (
+                    {data.dropdownOptions.infusionSets1.map((opt) => (
                       <option key={opt} value={opt}>{opt}</option>
                     ))}
                   </select>
@@ -491,7 +491,7 @@ export default function ReorderConfirmationPage() {
                     onChange={(e) => setInfusionSet2(e.target.value)}
                     className="w-full p-3 border rounded-lg text-base bg-white"
                   >
-                    {data.dropdownOptions.infusionSets.map((opt) => (
+                    {data.dropdownOptions.infusionSets2.map((opt) => (
                       <option key={opt} value={opt}>{opt}</option>
                     ))}
                   </select>

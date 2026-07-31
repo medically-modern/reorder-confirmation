@@ -39,7 +39,8 @@ export function transformItemToConfirmationData(
     insurance: buildInsurance(rawInsurance, memberId),
     dropdownOptions: {
       sensorTypes: getSensorTypeOptions(),
-      infusionSets: getInfusionSetOptions(),
+      infusionSets1: getInfusionSet1Options(),
+      infusionSets2: getInfusionSet2Options(),
       suppliesTypes: getSuppliesTypeOptions(),
       insuranceTypes: INSURANCE_OPTIONS,
     },
@@ -186,31 +187,71 @@ function getSensorTypeOptions(): string[] {
   ];
 }
 
-function getInfusionSetOptions(): string[] {
+// Infusion set options, per slot, spelled EXACTLY as the Subscription board
+// spells them. These are written straight through as `{ label: "..." }` (see
+// buildColumnUpdates), so Monday matches them byte-for-byte — a label that is
+// not on the column is rejected outright.
+//
+// Verified against a live read of the board on 2026-07-31, after the infusion-set
+// label lockdown. Before that lockdown this file listed every product as "6mm";
+// the boards standardised on "6 mm", which left ALL 23 options dead strings and
+// every patient infusion-set change failing.
+//
+// The two slots are NOT the same list. Infusion Set 1 (color_mkxm50f9) carries
+// five products that Infusion Set 2 (color_mkxmx5wk) does not, so offering one
+// shared list would let a patient pick something slot 2 cannot store.
+// Slot 1 only: QuickSet 18" · AutoSoft XC 9 mm 43" · AutoSoft 30 13 mm 43" ·
+// Luer 6 mm 32" · Mio Advance Clear 9 mm 23".
+function getInfusionSet1Options(): string[] {
   return [
-    'AutoSoft XC 6mm 23"',
-    'AutoSoft XC 6mm 32"',
-    'AutoSoft XC 6mm 43"',
-    'AutoSoft XC 6mm 5"',
-    'AutoSoft XC 9mm 23"',
-    'AutoSoft XC 9mm 43"',
-    'AutoSoft 90 6mm 23"',
-    'AutoSoft 90 6mm 43"',
-    'AutoSoft 90 9mm 23"',
-    'AutoSoft 90 9mm 43"',
-    'AutoSoft 30 13mm 23"',
-    'AutoSoft 30 13mm 43"',
-    'TruSteel 6mm 23"',
-    'TruSteel 6mm 32"',
-    'TruSteel 8mm 23"',
-    'TruSteel 8mm 32"',
-    'VariSoft 13mm 23"',
-    'VariSoft 13mm 32"',
-    'VariSoft 17mm 23"',
-    'Contact 6mm 23"',
-    'Inset 6mm 23"',
-    'Luer 6mm 32"',
-    'Mio Advance Clear 9mm 23"',
+    'AutoSoft XC 6 mm 5"',
+    'AutoSoft XC 6 mm 23"',
+    'AutoSoft XC 6 mm 32"',
+    'AutoSoft XC 6 mm 43"',
+    'AutoSoft XC 9 mm 23"',
+    'AutoSoft XC 9 mm 43"',
+    'AutoSoft 90 6 mm 23"',
+    'AutoSoft 90 6 mm 43"',
+    'AutoSoft 90 9 mm 23"',
+    'AutoSoft 90 9 mm 43"',
+    'AutoSoft 30 13 mm 23"',
+    'AutoSoft 30 13 mm 43"',
+    'TruSteel 6 mm 23"',
+    'TruSteel 6 mm 32"',
+    'TruSteel 8 mm 23"',
+    'TruSteel 8 mm 32"',
+    'VariSoft 13 mm 23"',
+    'VariSoft 13 mm 32"',
+    'VariSoft 17 mm 23"',
+    'Contact 6 mm 23"',
+    'Inset 6 mm 23"',
+    'Luer 6 mm 32"',
+    'Mio Advance Clear 9 mm 23"',
+    'QuickSet 18"',
+  ];
+}
+
+function getInfusionSet2Options(): string[] {
+  return [
+    'AutoSoft XC 6 mm 5"',
+    'AutoSoft XC 6 mm 23"',
+    'AutoSoft XC 6 mm 32"',
+    'AutoSoft XC 6 mm 43"',
+    'AutoSoft XC 9 mm 23"',
+    'AutoSoft 90 6 mm 23"',
+    'AutoSoft 90 6 mm 43"',
+    'AutoSoft 90 9 mm 23"',
+    'AutoSoft 90 9 mm 43"',
+    'AutoSoft 30 13 mm 23"',
+    'TruSteel 6 mm 23"',
+    'TruSteel 6 mm 32"',
+    'TruSteel 8 mm 23"',
+    'TruSteel 8 mm 32"',
+    'VariSoft 13 mm 23"',
+    'VariSoft 13 mm 32"',
+    'VariSoft 17 mm 23"',
+    'Contact 6 mm 23"',
+    'Inset 6 mm 23"',
   ];
 }
 

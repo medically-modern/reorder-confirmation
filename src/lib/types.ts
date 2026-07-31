@@ -156,7 +156,8 @@ export interface PatientInsurance {
 
 export interface DropdownOptions {
   sensorTypes: string[];
-  infusionSets: string[];
+  infusionSets1: string[];
+  infusionSets2: string[];
   suppliesTypes: string[];
   insuranceTypes: typeof INSURANCE_OPTIONS;
 }
